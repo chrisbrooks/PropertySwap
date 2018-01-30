@@ -1,0 +1,54 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+/// Regular font family
+$text-font-stack: 'Museo-Sans-300, Helvetica Neue, Helvetica, Arial, sans-serif' !default;
+$text-bold-font-stack: 'Museo-Sans-500, Helvetica Neue, Helvetica, Arial, sans-serif' !default;
+
+/// Colors
+$white: #FFFFFF !default;
+$black: #000000 !default;
+$primary-black: #333F48 !default;
+$primary-red: #E4002B !default;
+$secondary-red: #A30000 !default;
+$primary-grey: #F0F2F5 !default;
+
+/// Sizes for padding / margins etc
+$xxs: 6px;
+$xs: 10px;
+$sm: 16px;
+$md: 26px;
+$lg: 36px;
+
+/// Sizes for font / line height
+$font-extra-small: 9px;
+$line-height-extra-small: 9px;
+
+$font-small: 12px;
+$line-height-small: 18px;
+
+$font-standard: 14px;
+$line-height-standard: 21px;
+
+$font-medium: 16px;
+$line-height-medium: 24px;
+
+$font-medium-large: 18px;
+$line-height-medium-large: 27px;
+
+$font-large: 22px;
+$line-height-large: 33px;
+
+// Border sizes
+$border-small:  1px;
+$border-medium: 2px;
+$border-large: 3px;
+
+/// Container's maximum width
+$max-width: 1000px !default;
+
+/// Breakpoints map
+$breakpoint-small: 320px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 1024px;
