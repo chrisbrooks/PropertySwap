@@ -1,0 +1,19 @@
+@import "shared.scss";
+
+.Container {
+  background: $white;
+  height: 72px;
+  border-bottom: $border-small solid $secondary-grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LogoWrapper {
+  width: 156px;
+  display: block;
+}
+
+.Logo {
+  width: 100%;
+}
