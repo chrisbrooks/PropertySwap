@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
+import ToastWrapper from 'components/Shared/Toast/ToastWrapper';
+
 class App extends Component {
   constructor(props) {
     super(props);

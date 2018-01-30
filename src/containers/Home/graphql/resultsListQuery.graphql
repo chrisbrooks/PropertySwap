@@ -1,0 +1,26 @@
+query ResultsListQuery {
+  viewer {
+    results {
+      id
+      price
+      agency {
+        brandingColors {
+          primary
+        }
+        logo
+      }
+      mainImage
+    }
+    saved {
+      id
+      price
+      agency {
+        brandingColors {
+          primary
+        }
+        logo
+      }
+      mainImage
+    }
+  }
+}

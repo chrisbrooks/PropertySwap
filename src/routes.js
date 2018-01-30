@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import App from 'containers/Layouts/App/App';
-import Home from 'containers/Home/Home';
+import HomeWithData from 'containers/Home/HomeWithData';
 
 const Layout = ({
   component: Component,
@@ -24,7 +24,7 @@ export default function getRoutes() {
     <Switch>
       <Layout
         path="/"
-        component={Home} />
+        component={HomeWithData} />
     </Switch>
   );
 }
