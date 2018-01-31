@@ -6,10 +6,14 @@ import styles from './card.scss';
 
 const Card = ({
   className,
-  children
+  children,
+  onMouseEnter,
+  onMouseLeave
 }) => (
   <article
-    className={cx(styles.Card, className)}>
+    className={cx(styles.Card, className)}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}>
     { children }
   </article>
 );
@@ -17,6 +21,8 @@ const Card = ({
 Card.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func
 };
 
 export default Card;

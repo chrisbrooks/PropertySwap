@@ -11,10 +11,12 @@ class Home extends Component {
 
     this.state = {
       results: props.results,
-      saved: props.saved
+      saved: props.saved,
+      showButton: null
     }
 
-    this.addPropertyToSavedList = this.addPropertyToSavedList.bind(this);
+    this.handleAddPropertyToSavedList = this.handleAddPropertyToSavedList.bind(this);
+    this.handleToggleHover = this.handleToggleHover.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -27,14 +29,28 @@ class Home extends Component {
     }
   }
 
-  addPropertyToSavedList(result) {
+  handleAddPropertyToSavedList(result) {
     console.log('sdsd');
     console.log(result);
-    
+
     this.setState({
       saved: [...this.state.saved, result]
     });
   }
+
+  handleToggleHover(index) {
+    if (this.state.showButton === index) {
+      this.setState({
+        showButton: null
+      });
+    }
+    else {
+      this.setState({
+        showButton: index
+      });
+    }
+  }
+
 
   render() {
     const {
@@ -51,8 +67,11 @@ class Home extends Component {
         <div className={styles.Wrapper}>
           <div className={styles.Cards}>
             {
-              this.state.results && this.state.results.map((result) => (
-                <Card key={result.id}>
+              this.state.results && this.state.results.map((result, index) => (
+                <Card
+                  key={result.id}
+                  onMouseEnter={() => this.handleToggleHover(index)}
+                  onMouseLeave={() => this.handleToggleHover(index)}>
                   <div style={{backgroundColor: result.agency.brandingColors.primary}}>
                     <img
                       className={styles.Logo}
@@ -65,8 +84,8 @@ class Home extends Component {
                     alt="property image" />
                   <p className={styles.Price}>{result.price}</p>
                   <div
-                    onClick={() => this.addPropertyToSavedList(result)}
-                    className={styles.Button}>
+                    onClick={() => this.handleAddPropertyToSavedList(result)}
+                    className={this.state.showButton === index ? styles.ButtonHover : styles.Button}>
                     Add property
                   </div>
                 </Card>
