@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 
 import ToastWrapper from 'components/Shared/Toast/ToastWrapper';
 import Header from 'components/Shared/Header/Header';
-import './app.scss';
+import styles from './app.scss';
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +18,9 @@ class App extends Component {
         <Helmet titleTemplate="%s | Rea Coding Test" />
         <ToastWrapper />
         <Header />
-        { this.props.children }
+        <div className={styles.Container}>
+          { this.props.children }
+        </div>
       </div>
     );
   }

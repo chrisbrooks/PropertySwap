@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import './sass/fonts.css';
 import './sass/main.scss';
 import configureStore from './configureStore';
 import createApolloClient from './createApolloClient';

@@ -1,9 +1,6 @@
 @import "shared.scss";
 
-body {
-  font-size: $font-standard;
-  font-family: $text-font-stack;
-  line-height: $line-height-standard;
-  color: $primary-black;
-  background: $primary-grey;
+.Container {
+  width: $max-width;
+  margin: $lg auto;
 }
