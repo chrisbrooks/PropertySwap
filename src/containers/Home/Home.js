@@ -17,15 +17,15 @@ class Home extends Component {
 
     this.handleAddPropertyToSavedList = this.handleAddPropertyToSavedList.bind(this);
     this.handleToggleHover = this.handleToggleHover.bind(this);
+    this.handleRemovePropertyFromSavedList = this.handleRemovePropertyFromSavedList.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.results !== nextProps.results) {
-      this.state = { results: nextProps.results };
-    }
-
-    if (this.props.saved !== nextProps.saved) {
-      this.state = { results: nextProps.saved };
+    if (this.props !== nextProps) {
+      this.setState({
+        results: nextProps.results,
+        saved: nextProps.saved
+      });
     }
   }
 
@@ -36,6 +36,13 @@ class Home extends Component {
     this.setState({
       saved: [...this.state.saved, result]
     });
+  }
+
+  handleRemovePropertyFromSavedList(e) {
+    var array = this.state.saved;
+    var index = array.indexOf(e.target.value)
+    array.splice(index, 1);
+    this.setState({saved: array });
   }
 
   handleToggleHover(index) {
@@ -60,7 +67,10 @@ class Home extends Component {
     } = this.props;
 
     console.log(this.state.results);
-    console.log(results);
+    console.log(this.state.saved);
+
+    console.log(this.props.results);
+    console.log(this.props.saved);
 
     return (
       <div className={styles.Container}>
@@ -94,8 +104,11 @@ class Home extends Component {
           </div>
           <div className={styles.Cards}>
             {
-              this.state.saved && this.state.saved.map((save) => (
-                <Card key={save.id}>
+              this.state.saved && this.state.saved.map((save, index) => (
+                <Card
+                  key={save.id}
+                  onMouseEnter={() => this.handleToggleHover(index)}
+                  onMouseLeave={() => this.handleToggleHover(index)}>
                   <div style={{backgroundColor: save.agency.brandingColors.primary}}>
                     <img
                       className={styles.Logo}
@@ -108,9 +121,9 @@ class Home extends Component {
                     alt="property image" />
                   <p className={styles.Price}>{save.price}</p>
                   <div
-                    onClick={() => this.addPropertyToSavedList(result)}
-                    className={styles.Button}>
-                    Add property
+                    onClick={this.handleRemovePropertyFromSavedList}
+                    className={this.state.showButton === index ? styles.ButtonHover : styles.Button}>
+                    Remove property
                   </div>
                 </Card>
               )

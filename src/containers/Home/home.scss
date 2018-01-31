@@ -1,12 +1,16 @@
 @import "shared.scss";
 
 .Wrapper {
-  display: flex;
-  justify-content: space-between;
+  @include medium-large {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .Cards {
-  width: 48%;
+  @include medium-large {
+    width: 48%;
+  }
 }
 
 .Logo {

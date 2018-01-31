@@ -1,6 +1,10 @@
 @import "shared.scss";
 
 .Container {
-  width: $max-width;
-  margin: $lg auto;
+  max-width: $max-width;
+  margin: $lg $lg;
+
+  @include large {
+    margin: $lg auto;
+  }
 }
