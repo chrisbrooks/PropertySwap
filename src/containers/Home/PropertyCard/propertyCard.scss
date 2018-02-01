@@ -1,0 +1,69 @@
+@import "shared.scss";
+
+.Cards {
+  @include medium-large {
+    width: 48%;
+  }
+}
+
+.Logo {
+  height:28px;
+  margin: $xxs;
+  vertical-align: middle;
+}
+
+.Image {
+  width: 100%;
+  display: block;
+}
+
+.Price {
+  font-family: $text-bold-font-stack;
+  font-size: $font-medium;
+  padding: $sm;
+}
+
+.Button {
+  transition: all .1s ease-in;
+  opacity: 0;
+  visibility: hidden;
+  background: $primary-red;
+  border-radius: 50px;
+  position: absolute;
+  bottom: 70px;
+  left: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: $xxs $md;
+  color: $white;
+  box-sizing: border-box;
+  width: 90%;
+  text-align: center;
+  font-size: $font-medium;
+  cursor: pointer;
+}
+
+.ButtonHover {
+  composes: Button;
+  visibility: visible;
+  opacity: 1;
+}
+
+.Saved {
+  position: absolute;
+  bottom: 70px;
+  right: 5%;
+  background: $primary-black;
+  border-radius: 50px;
+  padding: $xxs $md;
+  box-sizing: border-box;
+  font-size: $font-medium;
+  color: $white;
+}
+
+.Title {
+  font-size: $font-medium;
+  font-family: $text-bold-font-stack;
+  text-align: center;
+  margin-bottom: $md;
+}

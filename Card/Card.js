@@ -4,7 +4,6 @@ import cx from 'classnames';
 
 import styles from './card.scss';
 
-// making a generic card for styling purposes
 const Card = ({
   className,
   children,

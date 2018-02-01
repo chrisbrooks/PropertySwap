@@ -1,10 +1,11 @@
-/* eslint-disable */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import Card from 'components/Shared/Card/Card';
+import PageLoader from 'components/Shared/PageLoader/PageLoader';
+import PropertyCard from './PropertyCard/PropertyCard';
 import styles from './home.scss';
 
-class Home extends Component {
+class PropertyList extends Component {
 
   constructor(props) {
     super(props);
@@ -13,15 +14,15 @@ class Home extends Component {
       results: props.results,
       saved: props.saved,
       showButton: null
-    }
+    };
 
     this.handleAddPropertyToSavedList = this.handleAddPropertyToSavedList.bind(this);
-    this.handleToggleHover = this.handleToggleHover.bind(this);
     this.handleRemovePropertyFromSavedList = this.handleRemovePropertyFromSavedList.bind(this);
+    this.handleToggleSavedFlag = this.handleToggleSavedFlag.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props !== nextProps) {
+    if (this.props.results !== nextProps.results || this.props.saved !== nextProps.saved) {
       this.setState({
         results: nextProps.results,
         saved: nextProps.saved
@@ -29,110 +30,75 @@ class Home extends Component {
     }
   }
 
-  handleAddPropertyToSavedList(result) {
-    console.log('sdsd');
-    console.log(result);
+  // handle setting the property saved flat on state
+  handleToggleSavedFlag(id) {
+    const toggleSavedFlag = this.state.results.map((item) => {
+      if (id === item.id) {
+        return {
+          ...item,
+          saved: !item.saved
+        };
+      }
+      return item;
+    });
 
     this.setState({
-      saved: [...this.state.saved, result]
+      results: toggleSavedFlag
     });
   }
 
-  handleRemovePropertyFromSavedList(e) {
-    var array = this.state.saved;
-    var index = array.indexOf(e.target.value)
-    array.splice(index, 1);
-    this.setState({saved: array });
-  }
-
-  handleToggleHover(index) {
-    if (this.state.showButton === index) {
+  // add the property to the saved list
+  handleAddPropertyToSavedList(property) {
+    if (this.state.saved.indexOf(property) < 1) {
+      this.handleToggleSavedFlag(property.id);
       this.setState({
-        showButton: null
-      });
-    }
-    else {
-      this.setState({
-        showButton: index
+        saved: [...this.state.saved, property],
       });
     }
   }
 
+  // remove the property from the saved list
+  handleRemovePropertyFromSavedList(propertyId) {
+    const savedProperties = this.state.saved;
+    const updatedSavedProperties = savedProperties.filter(property => property.id !== propertyId);
+    this.handleToggleSavedFlag(propertyId);
+    this.setState({ saved: updatedSavedProperties });
+  }
 
   render() {
     const {
-      loading,
-      results,
-      saved
+      loading
     } = this.props;
 
-    console.log(this.state.results);
-    console.log(this.state.saved);
-
-    console.log(this.props.results);
-    console.log(this.props.saved);
-
-    return (
+    let pageContent = (
       <div className={styles.Container}>
         <div className={styles.Wrapper}>
-          <div className={styles.Cards}>
-            {
-              this.state.results && this.state.results.map((result, index) => (
-                <Card
-                  key={result.id}
-                  onMouseEnter={() => this.handleToggleHover(index)}
-                  onMouseLeave={() => this.handleToggleHover(index)}>
-                  <div style={{backgroundColor: result.agency.brandingColors.primary}}>
-                    <img
-                      className={styles.Logo}
-                      src={result.agency.logo}
-                      alt="agency logo" />
-                  </div>
-                  <img
-                    className={styles.Image}
-                    src={result.mainImage}
-                    alt="property image" />
-                  <p className={styles.Price}>{result.price}</p>
-                  <div
-                    onClick={() => this.handleAddPropertyToSavedList(result)}
-                    className={this.state.showButton === index ? styles.ButtonHover : styles.Button}>
-                    Add property
-                  </div>
-                </Card>
-              )
-            )}
-          </div>
-          <div className={styles.Cards}>
-            {
-              this.state.saved && this.state.saved.map((save, index) => (
-                <Card
-                  key={save.id}
-                  onMouseEnter={() => this.handleToggleHover(index)}
-                  onMouseLeave={() => this.handleToggleHover(index)}>
-                  <div style={{backgroundColor: save.agency.brandingColors.primary}}>
-                    <img
-                      className={styles.Logo}
-                      src={save.agency.logo}
-                      alt="agency logo" />
-                  </div>
-                  <img
-                    className={styles.Image}
-                    src={save.mainImage}
-                    alt="property image" />
-                  <p className={styles.Price}>{save.price}</p>
-                  <div
-                    onClick={this.handleRemovePropertyFromSavedList}
-                    className={this.state.showButton === index ? styles.ButtonHover : styles.Button}>
-                    Remove property
-                  </div>
-                </Card>
-              )
-            )}
-          </div>
+          <PropertyCard
+            title="Results"
+            items={this.state.results}
+            onHandleAddItem={this.handleAddPropertyToSavedList}
+          />
+          <PropertyCard
+            title="Saved properties"
+            items={this.state.saved}
+            onHandleRemoveItem={this.handleRemovePropertyFromSavedList}
+          />
         </div>
       </div>
     );
-  }
- }
 
-export default Home;
+    if (loading) {
+      pageContent = <PageLoader />;
+    }
+
+    return pageContent;
+  }
+}
+
+PropertyList.propTypes = {
+  results: PropTypes.array,
+  saved: PropTypes.array,
+  loading: PropTypes.bool
+};
+
+export default PropertyList;
