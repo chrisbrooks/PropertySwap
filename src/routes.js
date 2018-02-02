@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import App from 'containers/Layouts/App/App';
+import App from 'containers/App/App';
 import HomeWithData from 'containers/Home/HomeWithData';
 
 const Layout = ({

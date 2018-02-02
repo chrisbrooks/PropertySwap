@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 
 import PageLoader from 'components/Shared/PageLoader/PageLoader';
 import PropertyCard from './PropertyCard/PropertyCard';
@@ -12,8 +13,7 @@ class PropertyList extends Component {
 
     this.state = {
       results: props.results,
-      saved: props.saved,
-      showButton: null
+      saved: props.saved
     };
 
     this.handleAddPropertyToSavedList = this.handleAddPropertyToSavedList.bind(this);
@@ -22,6 +22,8 @@ class PropertyList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // check if props have been updated to then update the state. With graphql mutations this would not be needed
+    // the props would be updated with the mutation, but for now this is fine to demonstrate the functionality
     if (this.props.results !== nextProps.results || this.props.saved !== nextProps.saved) {
       this.setState({
         results: nextProps.results,
@@ -52,7 +54,7 @@ class PropertyList extends Component {
     if (this.state.saved.indexOf(property) < 1) {
       this.handleToggleSavedFlag(property.id);
       this.setState({
-        saved: [...this.state.saved, property],
+        saved: [...this.state.saved, property]
       });
     }
   }
@@ -72,6 +74,7 @@ class PropertyList extends Component {
 
     let pageContent = (
       <div className={styles.Container}>
+        <Helmet title="REA Coding Test" />
         <div className={styles.Wrapper}>
           <PropertyCard
             title="Results"

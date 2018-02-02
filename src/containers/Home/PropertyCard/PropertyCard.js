@@ -13,21 +13,21 @@ class PropertyCard extends Component {
       showButton: null
     };
 
-    this.handleToggleHover = this.handleToggleHover.bind(this);
+    this.handleAddHover = this.handleAddHover.bind(this);
+    this.handleRemoveHover = this.handleRemoveHover.bind(this);
   }
 
   // toggle the hover effect on the property tile
-  handleToggleHover(index) {
-    if (this.state.showButton === index) {
-      this.setState({
-        showButton: null
-      });
-    }
-    else {
-      this.setState({
-        showButton: index
-      });
-    }
+  handleAddHover(index) {
+    this.setState({
+      showButton: index
+    });
+  }
+
+  handleRemoveHover() {
+    this.setState({
+      showButton: null
+    });
   }
 
   render() {
@@ -40,13 +40,13 @@ class PropertyCard extends Component {
     } = this.props;
 
     // handle if the item needs to be added or removed
-    const onHandleClick = (item, index) => {
+    const onHandleClick = (item) => {
       if (onHandleAddItem) {
         onHandleAddItem(item);
       }
       else {
         onHandleRemoveItem(item.id);
-        this.handleToggleHover(index);
+        this.handleRemoveHover();
       }
     };
 
@@ -57,8 +57,8 @@ class PropertyCard extends Component {
           items && items.map((item, index) => (
             <Card
               key={item.id}
-              onMouseEnter={() => this.handleToggleHover(index)}
-              onMouseLeave={() => this.handleToggleHover(index)}>
+              onMouseEnter={() => this.handleAddHover(index)}
+              onMouseLeave={() => this.handleRemoveHover(index)}>
               <div style={{ backgroundColor: item.agency.brandingColors.primary }}>
                 <img
                   className={styles.Logo}
@@ -72,7 +72,7 @@ class PropertyCard extends Component {
               <p className={styles.Price}>{item.price}</p>
               { !item.saved ? (
                 <div
-                  onClick={() => onHandleClick(item, index)}
+                  onClick={() => onHandleClick(item)}
                   className={this.state.showButton === index ? styles.ButtonHover : styles.Button}>
                   {onHandleAddItem ? 'Add property' : 'Remove property'}
                 </div>

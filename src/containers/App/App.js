@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
 
 import ToastWrapper from 'components/Shared/Toast/ToastWrapper';
 import Header from 'components/Shared/Header/Header';
@@ -15,7 +14,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Helmet titleTemplate="%s | Rea Coding Test" />
         <ToastWrapper />
         <Header />
         <div className={styles.Container}>

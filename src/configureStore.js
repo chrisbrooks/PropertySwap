@@ -1,12 +1,10 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { reducer as formReducer } from 'redux-form';
 
 const configureStore = (apolloClient) => {
 
   const reducers = {
-    apollo: apolloClient.reducer(),
-    form: formReducer,
+    apollo: apolloClient.reducer()
   };
 
   /*
