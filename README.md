@@ -23,4 +23,4 @@ To use the app follow the simple step below.
 To run the tests follow the steps below:
 
 1. Run `yarn test` to run the test suite in the command line.
-2. Run `yarn test-coverage` to build the jest code coverage tool. To view the results just visit http://localhost:3000/coverage/lcov-report/
+2. Run `yarn run test-coverage` to build the jest code coverage tool. To view the results just visit http://localhost:3000/coverage/lcov-report/
