@@ -15,6 +15,7 @@ class PropertyCard extends Component {
 
     this.handleAddHover = this.handleAddHover.bind(this);
     this.handleRemoveHover = this.handleRemoveHover.bind(this);
+    this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
   // toggle the hover effect on the property tile
@@ -30,25 +31,23 @@ class PropertyCard extends Component {
     });
   }
 
+  handleButtonClick(item) {
+    if (this.props.onHandleAddItem) {
+      this.props.onHandleAddItem(item);
+    }
+    else {
+      this.props.onHandleRemoveItem(item.id);
+      this.handleRemoveHover();
+    }
+  }
+
   render() {
 
     const {
       items,
       onHandleAddItem,
-      onHandleRemoveItem,
       title
     } = this.props;
-
-    // handle if the item needs to be added or removed
-    const onHandleClick = (item) => {
-      if (onHandleAddItem) {
-        onHandleAddItem(item);
-      }
-      else {
-        onHandleRemoveItem(item.id);
-        this.handleRemoveHover();
-      }
-    };
 
     return (
       <div className={styles.Cards}>
@@ -72,7 +71,7 @@ class PropertyCard extends Component {
               <p className={styles.Price}>{item.price}</p>
               { !item.saved ? (
                 <div
-                  onClick={() => onHandleClick(item)}
+                  onClick={() => this.handleButtonClick(item)}
                   className={this.state.showButton === index ? styles.ButtonHover : styles.Button}>
                   {onHandleAddItem ? 'Add property' : 'Remove property'}
                 </div>
