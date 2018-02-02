@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 
 import PageLoader from 'components/Shared/PageLoader/PageLoader';
 import PropertyCard from './PropertyCard/PropertyCard';
-import styles from './home.scss';
+import styles from './propertyList.scss';
 
 class PropertyList extends Component {
 
