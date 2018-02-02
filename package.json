@@ -101,7 +101,10 @@
       "src/root.js",
       "src/routes.js",
       "src/index.js",
-      "src/containers/PropertyList/PropertyListWithData"
+      "src/containers/PropertyList/PropertyListWithData",
+      "src/containers/App/App",
+      "src/components/PageLoader/PageLoader",
+      "src/components/Shared/Header/Header"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js"
