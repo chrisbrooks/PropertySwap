@@ -100,7 +100,8 @@
       "src/createApolloClient.js",
       "src/root.js",
       "src/routes.js",
-      "src/index.js"
+      "src/index.js",
+      "src/containers/PropertyList/PropertyListWithData"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js"

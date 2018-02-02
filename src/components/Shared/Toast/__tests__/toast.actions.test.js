@@ -10,8 +10,7 @@ describe('toast action creator tests', () => {
       type: ACTION_TYPES.SHOW_TOAST,
       payload: {
         type: Type.DANGER,
-        message: 'Network Error',
-        viewName: 'Users screen'
+        message: 'Network Error'
       }
     });
   });

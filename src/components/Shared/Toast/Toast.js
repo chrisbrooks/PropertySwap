@@ -9,7 +9,7 @@ export const Type = {
   DANGER: 'Danger'
 };
 
-const Toast = ({ type, dismiss, children, show, timeoutAmount = 1000000 }) => {
+const Toast = ({ type, dismiss, children, show, timeoutAmount = 10000 }) => {
 
   if (show) {
     setTimeout(() => {
@@ -17,12 +17,10 @@ const Toast = ({ type, dismiss, children, show, timeoutAmount = 1000000 }) => {
     }, timeoutAmount);
   }
 
-  const toastType = Type.DANGER || type;
-
   return (
     <div className={show ? styles.ContainerOpen : styles.Container}>
       <div className={styles.Inner}>
-        <div className={cx(styles.Toast, styles[toastType])}>
+        <div className={cx(styles.Toast, styles[type])}>
           { children }
           <p className={styles.Icon}onClick={dismiss}>X</p>
         </div>
